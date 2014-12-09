@@ -16,14 +16,20 @@ class OpenStack
 
 end
 
+def compute
+  Fog::Compute[:openstack]
+end
+
 def get_flavor_ref
-  compute = Fog::Compute[:openstack]
   ENV['OPENSTACK_FLAVOR_REF'] || compute.list_flavors.body['flavors'].first['id']
 end
 
 def get_image_ref
-  compute = Fog::Compute[:openstack]
   ENV['OPENSTACK_IMAGE_REF'] || compute.list_images.body['images'].first['id']
+end
+
+def get_volume_ref
+  ENV['OPENSTACK_VOLUME_REF'] || compute.list_volumes.body['volumes'].first['id']
 end
 
 def get_flavor_ref_resize
